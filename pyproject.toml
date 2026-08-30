@@ -1,0 +1,12 @@
+[project]
+name = "gitfromscratch"
+version = "0.1.0"
+description = "A minimal Git implementation built from scratch, for learning purposes."
+requires-python = ">=3.10"
+
+[project.scripts]
+gfs = "gitfromscratch.cli:main"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
