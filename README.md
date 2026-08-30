@@ -2,7 +2,7 @@
 
 A minimal implementation of Git, built from scratch in Python — to actually understand how Git works under the hood, instead of just using it.
 
-> ⚠️ This is a **learning project**, not a replacement for Git. It reimplements Git's core ideas (object storage, staging, commits, branches) in a simplified way. Don't use it to manage real projects — use real Git for that!
+> This is a **learning project**, not a replacement for Git. It reimplements Git's core ideas (object storage, staging, commits, branches) in a simplified way. Don't use it to manage real projects — use real Git for that!
 
 ## Why I built this
 
@@ -44,8 +44,8 @@ Because objects are named after their own content's hash, identical content is o
 ## Usage
 
 ```bash
-git clone https://github.com/<your-username>/gitfromscratch.git
-cd gitfromscratch
+git clone https://github.com/rishita-bisht/gitFromScratch.git
+cd gitFromScratch
 pip install -e .
 
 gfs init
