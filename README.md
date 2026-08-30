@@ -2,7 +2,7 @@
 
 A minimal implementation of Git, built from scratch in Python — to actually understand how Git works under the hood, instead of just using it.
 
-> ⚠️ This is a **learning project**, not a replacement for Git. It reimplements Git's core ideas (object storage, staging, commits, branches) in a simplified way. Don't use it to manage real projects — use real Git for that!
+> This is a **learning project**, not a replacement for Git. It reimplements Git's core ideas (object storage, staging, commits, branches) in a simplified way. Don't use it to manage real projects — use real Git for that!
 
 ## Why I built this
 
