@@ -1,9 +1,19 @@
+"""
+refs.py — HEAD and branches.
+
+A branch is nothing fancy: it's just a small file containing a commit hash.
+HEAD is usually an *indirect* pointer — it says "look at this branch file"
+rather than storing a commit hash directly. That's what makes committing
+on a branch automatically "move the branch forward".
+"""
+
 import os
 
 from gitfromscratch.repo import repo_path
 
 
 def get_head() -> str | None:
+    """Resolve HEAD all the way down to an actual commit hash (or None if no commits yet)."""
     head_path = repo_path("HEAD")
     with open(head_path) as f:
         ref = f.read().strip()
@@ -19,6 +29,7 @@ def get_head() -> str | None:
 
 
 def set_head(sha1: str):
+    """Point the current branch (or HEAD, if detached) at a new commit hash."""
     head_path = repo_path("HEAD")
     with open(head_path) as f:
         ref = f.read().strip()
@@ -34,6 +45,7 @@ def set_head(sha1: str):
 
 
 def current_branch() -> str | None:
+    """Return the current branch name, or None if HEAD is detached."""
     head_path = repo_path("HEAD")
     with open(head_path) as f:
         ref = f.read().strip()
@@ -44,6 +56,7 @@ def current_branch() -> str | None:
 
 
 def list_branches() -> list[str]:
+    """List every branch that exists (has a file under refs/heads/)."""
     heads_dir = repo_path("refs", "heads")
     if not os.path.isdir(heads_dir):
         return []
@@ -51,6 +64,7 @@ def list_branches() -> list[str]:
 
 
 def create_branch(name: str):
+    """Create a new branch pointing at the current commit."""
     sha1 = get_head()
     if sha1 is None:
         raise ValueError("Cannot create a branch: no commits yet.")
@@ -64,9 +78,17 @@ def create_branch(name: str):
 
 
 def switch_branch(name: str):
+    """Point HEAD at a different branch (does NOT touch working directory files)."""
     branch_path = repo_path("refs", "heads", name)
     if not os.path.exists(branch_path):
         raise ValueError(f"Branch '{name}' does not exist.")
 
     with open(repo_path("HEAD"), "w") as f:
         f.write(f"ref: refs/heads/{name}\n")
+
+
+def detach_head(sha1: str):
+    """Point HEAD directly at a commit hash (used by checkout — 'detached HEAD' state)."""
+    head_path = repo_path("HEAD")
+    with open(head_path, "w") as f:
+        f.write(sha1 + "\n")
